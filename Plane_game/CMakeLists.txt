@@ -3,7 +3,7 @@
 project ("Plane_game")
 
 # Dodaj źródło do pliku wykonywalnego tego projektu.
-add_executable (Plane_game "main.cpp" "Game.h" "Game.cpp")
+add_executable (Plane_game "main.cpp" "Game.h" "Game.cpp" "Plane.h" "Plane.cpp")
 
 target_link_libraries(Plane_game ${CMAKE_SOURCE_DIR}/lib/sfml-graphics.lib)
 target_link_libraries(Plane_game ${CMAKE_SOURCE_DIR}/lib/sfml-system.lib)

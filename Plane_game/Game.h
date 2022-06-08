@@ -1,20 +1,23 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
-#include "SFML/System.hpp"
-#include "SFML/Window.hpp"
-#include "SFML/Network.hpp"
+#include "Plane.h"
 
 class Game
 {
 private:
-	const int WINDOW_WIDTH = 800;
-	const int WINDOW_HEIGHT = 600;
+	// Window
+	const int WINDOW_WIDTH = 1280;
+	const int WINDOW_HEIGHT = 720;
 	sf::VideoMode videoMode;
 	sf::RenderWindow* window;
+	sf::Event ev;
+
+	// Plane
+	Plane* plane;
 
 	// Functions
 	void initWindow();
+	void initPlane();
 
 public:
 	// Constructors / Destructors
@@ -22,8 +25,9 @@ public:
 	~Game();
 
 	// Functions
+	void updateEvents();
 	void update();
-	void render(sf::RenderTarget* target);
+	void render();
 
 	void run();
 };
