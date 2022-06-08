@@ -26,6 +26,7 @@ public:
 
 	// Functions
 	void updateEvents();
+	void updateInput();
 	void update();
 	void render();
 

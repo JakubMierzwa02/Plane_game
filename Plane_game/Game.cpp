@@ -40,10 +40,21 @@ void Game::updateEvents()
 	}
 }
 
+void Game::updateInput()
+{
+	// Move left
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+		this->plane->move(-1.f, 0);
+	// Move right
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		this->plane->move(1.f, 0);
+}
+
 // Functions
 void Game::update()
 {
 	this->updateEvents();
+	this->updateInput();
 }
 
 void Game::render()
