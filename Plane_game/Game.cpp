@@ -9,7 +9,8 @@ void Game::initWindow()
 
 void Game::initPlane()
 {
-	this->plane = new Plane(this->WINDOW_WIDTH / 2.f, this->WINDOW_HEIGHT - 50.f, sf::Vector2f(20.f, 50.f));
+	// Create new plane
+	this->plane = new Plane(this->WINDOW_WIDTH / 2.f, this->WINDOW_HEIGHT - 70.f, sf::Vector2f(30.f, 70.f));
 }
 
 // Constructors / Destructors
@@ -50,11 +51,22 @@ void Game::updateInput()
 		this->plane->move(1.f, 0);
 }
 
+void Game::checkCollision()
+{
+	// Left collision
+	if (this->plane->getShape().left < 0)
+		this->plane->move(1.f, 0);
+	// Right collision
+	if (this->plane->getShape().left + this->plane->getShape().width > this->WINDOW_WIDTH)
+		this->plane->move(-1.f, 0);
+}
+
 // Functions
 void Game::update()
 {
 	this->updateEvents();
 	this->updateInput();
+	this->checkCollision();
 }
 
 void Game::render()

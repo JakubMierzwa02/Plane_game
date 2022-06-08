@@ -27,6 +27,7 @@ public:
 	// Functions
 	void updateEvents();
 	void updateInput();
+	void checkCollision();
 	void update();
 	void render();
 

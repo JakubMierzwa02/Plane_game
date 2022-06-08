@@ -18,8 +18,11 @@ public:
 	Plane(float pos_x, float pos_y, sf::Vector2f size);
 	~Plane();
 
+	// Accessors
+	const sf::FloatRect getShape() const;
+
 	// Functions
 	void move(const float dir_x, const float dir_y);
-	void update();
+
 	void render(sf::RenderTarget* target);
 };
