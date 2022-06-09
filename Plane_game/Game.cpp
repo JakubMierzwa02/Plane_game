@@ -18,13 +18,22 @@ void Game::initPlane()
 	this->drag = 0.5f;
 }
 
+void Game::initObstacle()
+{
+	this->gap_size = 150.f;
+	this->spawnTimerMax = 80.f;
+	this->spawnTimer = this->spawnTimerMax;
+}
+
 // Constructors / Destructors
 Game::Game()
 {
+	this->multiplier = 60.f;
+
 	this->initWindow();
 	this->initPlane();
-
-	this->multiplier = 60.f;
+	// TEMPORARY
+	this->initObstacle();
 }
 
 Game::~Game()
@@ -33,6 +42,7 @@ Game::~Game()
 	delete this->plane;
 }
 
+// Functions
 void Game::updateEvents()
 {
 	while (this->window->pollEvent(this->ev))
@@ -104,12 +114,44 @@ void Game::checkCollision()
 	}
 }
 
-// Functions
+void Game::updateObstacles()
+{
+	// Spawn obstacle
+	if (this->spawnTimer < this->spawnTimerMax)
+		this->spawnTimer++;
+	else
+	{
+		this->rand_size_x = rand() % int(this->WINDOW_WIDTH - this->gap_size);
+		this->obstacles.push_back(new Obstacle(sf::Vector2f(this->rand_size_x, 30.f), this->gap_size, sf::Vector2f(this->WINDOW_WIDTH - this->gap_size, 30.f)));
+		this->spawnTimer = 0;
+	}
+
+	for (size_t i = 0; i < this->obstacles.size(); i++)
+	{
+		// Move obstacles
+		this->obstacles[i]->move(5.f, this->dt * this->multiplier);
+
+		// Check if out of bounds
+		if (this->obstacles[i]->getPos().top > this->WINDOW_HEIGHT)
+		{
+			delete this->obstacles[i];
+			this->obstacles.erase(this->obstacles.begin() + i);
+		}
+	}
+}
+
 void Game::update()
 {
 	this->updateEvents();
 	this->updateInput();
 	this->checkCollision();
+	this->updateObstacles();
+
+	/* Testing area */
+
+
+
+	/* Testing area */
 }
 
 void Game::render()
@@ -117,6 +159,13 @@ void Game::render()
 	this->window->clear();
 
 	// Render stuff
+	// Render obstacles
+	for (size_t i = 0; i < this->obstacles.size(); i++)
+	{
+		this->obstacles[i]->render(this->window);
+	}
+
+	// Render plane
 	this->plane->render(this->window);
 
 	this->window->display();

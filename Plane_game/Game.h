@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+#include <vector>
+
 #include "Plane.h"
 #include "Obstacle.h"
 
@@ -28,9 +31,18 @@ private:
 	float acceleration;
 	float drag;
 
+	// Obstacle
+	float gap_size;
+	float rand_size_x;
+	int spawnTimerMax;
+	int spawnTimer;
+	Obstacle* obstacle;
+	std::vector<Obstacle*> obstacles;
+
 	// Functions
 	void initWindow();
 	void initPlane();
+	void initObstacle();
 
 public:
 	// Constructors / Destructors
@@ -41,6 +53,7 @@ public:
 	void updateEvents();
 	void updateInput();
 	void checkCollision();
+	void updateObstacles();
 	void update();
 	void render();
 

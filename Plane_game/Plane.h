@@ -11,7 +11,6 @@ private:
 	sf::RectangleShape shape;
 
 	sf::Color color;
-	float movementSpeed;
 
 public:
 	// Constructors / Destructors

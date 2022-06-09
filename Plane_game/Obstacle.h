@@ -14,6 +14,10 @@ public:
 	Obstacle(sf::Vector2f sizeL, float gap, sf::Vector2f sizeR);
 	~Obstacle();
 
+	// Accessors
+	const sf::FloatRect getPos() const;
+
 	// Functions
-	void render(sf::RenderTarget* target);
+	void move(float, float);
+	void render(sf::RenderTarget*);
 };
