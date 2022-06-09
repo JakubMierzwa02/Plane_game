@@ -15,7 +15,8 @@ public:
 	~Obstacle();
 
 	// Accessors
-	const sf::FloatRect getPos() const;
+	const sf::FloatRect getBoundsL() const;
+	const sf::FloatRect getBoundsR() const;
 
 	// Functions
 	void move(float, float);

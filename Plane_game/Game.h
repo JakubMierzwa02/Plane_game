@@ -21,6 +21,14 @@ private:
 	float dt;
 	float multiplier;
 
+	// Game logic
+	bool endGame;
+	int points;
+
+	// GUI
+	sf::Font font;
+	sf::Text text;
+
 	// Plane
 	Plane* plane;
 
@@ -41,6 +49,8 @@ private:
 
 	// Functions
 	void initWindow();
+	void initLogic();
+	void initGui();
 	void initPlane();
 	void initObstacle();
 
@@ -52,7 +62,8 @@ public:
 	// Functions
 	void updateEvents();
 	void updateInput();
-	void checkCollision();
+	void checkWindowCollision();
+	void checkObstacleCollision();
 	void updateObstacles();
 	void update();
 	void render();

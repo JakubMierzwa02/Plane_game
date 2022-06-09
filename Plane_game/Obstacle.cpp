@@ -18,9 +18,14 @@ Obstacle::~Obstacle()
 
 }
 
-const sf::FloatRect Obstacle::getPos() const
+const sf::FloatRect Obstacle::getBoundsL() const
 {
 	return this->shapeL.getGlobalBounds();
+}
+
+const sf::FloatRect Obstacle::getBoundsR() const
+{
+	return this->shapeR.getGlobalBounds();
 }
 
 void Obstacle::move(float velocity, float dt)

@@ -7,6 +7,24 @@ void Game::initWindow()
 	this->window->setFramerateLimit(60);
 }
 
+void Game::initLogic()
+{
+	this->endGame = false;
+	this->points = 0;
+}
+
+void Game::initGui()
+{
+	// TODO
+	//this->font.loadFromFile("Fonts/font.ttf");
+
+	//this->text.setFont(this->font);
+	//this->text.setCharacterSize(32);
+	//this->text.setFillColor(sf::Color::White);
+	////this->text.setPosition(sf::Vector2f(10.f, 10.f));
+	//this->text.setString("NONE");
+}
+
 void Game::initPlane()
 {
 	// Create new plane
@@ -31,8 +49,9 @@ Game::Game()
 	this->multiplier = 60.f;
 
 	this->initWindow();
+	this->initLogic();
+	this->initGui();
 	this->initPlane();
-	// TEMPORARY
 	this->initObstacle();
 }
 
@@ -98,7 +117,7 @@ void Game::updateInput()
 	this->plane->move(this->currVelocity.x, this->dt * this->multiplier);
 }
 
-void Game::checkCollision()
+void Game::checkWindowCollision()
 {
 	// Left collision
 	if (this->plane->getShape().left < 0)
@@ -131,8 +150,12 @@ void Game::updateObstacles()
 		// Move obstacles
 		this->obstacles[i]->move(5.f, this->dt * this->multiplier);
 
+		// Get point
+		if (this->plane->getShape().top < this->obstacles[i]->getBoundsL().top && this->obstacles[i]->getBoundsL().top < this->plane->getShape().top + 5.f)
+			this->points++;
+
 		// Check if out of bounds
-		if (this->obstacles[i]->getPos().top > this->WINDOW_HEIGHT)
+		if (this->obstacles[i]->getBoundsL().top > this->WINDOW_HEIGHT)
 		{
 			delete this->obstacles[i];
 			this->obstacles.erase(this->obstacles.begin() + i);
@@ -140,16 +163,26 @@ void Game::updateObstacles()
 	}
 }
 
+void Game::checkObstacleCollision()
+{
+	for (size_t i = 0; i < this->obstacles.size(); i++)
+	{
+		if (this->plane->getShape().intersects(this->obstacles[i]->getBoundsL()) || this->plane->getShape().intersects(this->obstacles[i]->getBoundsR()))
+			this->endGame = true;
+	}
+}
+
 void Game::update()
 {
 	this->updateEvents();
 	this->updateInput();
-	this->checkCollision();
+	this->checkWindowCollision();
+	this->checkObstacleCollision();
 	this->updateObstacles();
 
 	/* Testing area */
 
-
+	
 
 	/* Testing area */
 }
@@ -168,6 +201,9 @@ void Game::render()
 	// Render plane
 	this->plane->render(this->window);
 
+	// Render GUI
+	//this->window->draw(this->text);
+
 	this->window->display();
 }
 
@@ -176,7 +212,8 @@ void Game::run()
 	// Game loop
 	while (this->window->isOpen())
 	{
-		this->update();
+		if (!endGame)
+			this->update();
 		this->render();
 	}
 }
