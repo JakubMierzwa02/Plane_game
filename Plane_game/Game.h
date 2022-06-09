@@ -12,8 +12,20 @@ private:
 	sf::RenderWindow* window;
 	sf::Event ev;
 
+	// Framerate
+	sf::Clock clock;
+	float dt;
+	float multiplier;
+
 	// Plane
 	Plane* plane;
+
+	// Plane movement
+	sf::Vector2f currVelocity;
+	sf::Vector2f dir;
+	float maxVelocity;
+	float acceleration;
+	float drag;
 
 	// Functions
 	void initWindow();

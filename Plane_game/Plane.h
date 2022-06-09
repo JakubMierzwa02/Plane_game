@@ -21,8 +21,11 @@ public:
 	// Accessors
 	const sf::FloatRect getShape() const;
 
+	// Modifiers
+	void setPos(sf::Vector2f pos);
+
 	// Functions
-	void move(const float dir_x, const float dir_y);
+	void move(float velocity, float dt);
 
 	void render(sf::RenderTarget* target);
 };
