@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Plane.h"
+#include "Obstacle.h"
 
 class Game
 {
