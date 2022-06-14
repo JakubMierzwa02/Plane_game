@@ -1,11 +1,11 @@
 #include "Plane.h"
 
-Plane::Plane(float pos_x, float pos_y, sf::Vector2f size)
+Plane::Plane(float pos_x, float pos_y)
 {
-	this->color = sf::Color::White;
+	this->shapeTex.loadFromFile("Resources/plane.png");
+	this->shape.setTexture(this->shapeTex);
+	this->shape.setScale(0.22f, 0.22f);
 
-	this->shape.setFillColor(color);
-	this->shape.setSize(size);
 	this->shape.setPosition(pos_x, pos_y);
 }
 

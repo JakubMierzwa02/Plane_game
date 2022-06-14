@@ -44,7 +44,7 @@ private:
 	Obstacle* obstacle;
 	std::vector<Obstacle*> obstacles;
 
-	// Functions
+	// Initializer functions
 	void initWindow();
 	void initLogic();
 	void initGui();

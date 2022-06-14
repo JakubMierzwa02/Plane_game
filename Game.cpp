@@ -1,5 +1,6 @@
 #include "Game.h"
 
+// Initializer functions
 void Game::initWindow()
 {
 	this->videoMode = sf::VideoMode(this->WINDOW_WIDTH, this->WINDOW_HEIGHT);
@@ -28,7 +29,7 @@ void Game::initGui()
 void Game::initPlane()
 {
 	// Create new plane
-	this->plane = new Plane(this->WINDOW_WIDTH / 2.f, this->WINDOW_HEIGHT - 70.f, sf::Vector2f(30.f, 70.f));
+	this->plane = new Plane(this->WINDOW_WIDTH / 2.f, this->WINDOW_HEIGHT - 70.f);
 
 	// Init movement
 	this->maxVelocity = 25.f;

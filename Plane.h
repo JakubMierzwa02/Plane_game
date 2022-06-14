@@ -13,13 +13,12 @@
 class Plane
 {
 private:
-	sf::RectangleShape shape;
-
-	sf::Color color;
+	sf::Texture shapeTex;
+	sf::Sprite shape;
 
 public:
 	// Constructors / Destructors
-	Plane(float pos_x, float pos_y, sf::Vector2f size);
+	Plane(float pos_x, float pos_y);
 	~Plane();
 
 	// Accessors
